@@ -184,13 +184,35 @@ class SpecterInterface implements SourceInterface{
                 }
             };
             $pk->username = $username;
-            $pk->gameEdition = 0;
+            $pk->gameEdition = LoginPacket::EDITION_POCKET;
             $pk->protocol = ProtocolInfo::CURRENT_PROTOCOL;
             $pk->clientUUID = UUID::fromData($address, $port, $username)->toString();
             $pk->clientId = 1;
-            $pk->identityPublicKey = "key here";
-            $pk->skin = str_repeat("\x80", 64 * 32 * 4);
-            $pk->skinId = "Standard_Alex";
+			$pk->xuid = "1";
+			$pk->identityPublicKey = "key here";
+			$pk->serverAddress = "localhost:SPECTER";
+			$pk->locale = "en_US";
+            $pk->chainData = [
+				"chain" => ["","",""]
+			];
+            $pk->clientDataJwt = "";
+			$pk->skipVerification = true;
+			$pk->clientData = [
+				"CapeData" => "",
+				"ClientRandomId" => 1,
+				"CurrentInputMode" => 2,
+				"DefaultInputMode" => 2,
+				"DeviceModel" => "SPECTER",
+				"DeviceOS" => -1,
+				"GameVersion" => ProtocolInfo::MINECRAFT_VERSION,
+				"GuiScale" => -1,
+				"LanguageCode" => "en_US",
+				"ServerAddress" => "localhost:SPECTER",
+				"SkinData" => base64_encode(str_repeat("\x80", 64 * 32 * 4)),
+				"SkinGeometryName" => "Specter",
+				"SkinId" => "Standard_Alex",
+				"UIProfile" => 1
+			];
 
             $pk->handle($player->getSessionAdapter());
 
